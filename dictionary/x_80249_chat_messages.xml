@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="messages" max_length="40" name="x_80249_chat_messages" type="collection">
+        <element label="Created at" max_length="40" name="created_at" type="glide_date_time"/>
+        <element label="message" max_length="40" name="message" type="string"/>
+        <element label="username" max_length="40" name="username" type="string"/>
+    </element>
+</database>

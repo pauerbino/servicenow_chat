@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script/>
+        <description/>
+        <direct>true</direct>
+        <endpoint>x_80249_chat_Chat.do</endpoint>
+        <html><![CDATA[<html ng-app="myapp">
+	<head>
+		<meta charset="utf-8" />
+		<title>ServiceNow + Angular chat</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+		<script language="javascript" src="x_80249_chat.angular_1_3.jsdbx" />
+		<script language="javascript" src="x_80249_chat.Chat_app.jsdbx" />
+
+		<style>
+			body,html{padding-top:10px;}
+			.message-bubble {padding: 10px 0px 10px 10px;}
+			.message-bubble:nth-child(even) { background-color: #F5F5F5; }
+			.message-bubble > *{ padding-left: 10px;}
+			.panel-body { padding: 0px; }
+			.panel-heading { background-color: #3d6da7 !important; color: white !important; }	
+			.green {background-color:#5cb85c !important;}
+		</style>
+	</head>
+	
+	<body>
+		<div class="container" ng-controller="mainController">
+			<div class="row">
+				<div class="panel panel-default">
+				  <div class="panel-heading green">Chat</div>
+				  <div class="panel-body">
+					<div class="container">
+						<div class="row message-bubble" ng-repeat="msg in messages">
+							<p class="text-muted">{{msg.username}}</p>
+							<span>{{msg.message}}</span>
+						</div>
+					</div>
+					<div class="panel-footer">
+						 <div class="input-group">
+						  <input ng-model="newMessage.message" type="text" class="form-control" />
+						  <span class="input-group-btn">
+							<button class="btn btn-success" type="button" ng-click="addMessageFromAPI()">Send</button>
+						  </span>
+						</div>
+					</div>
+				  </div>
+				</div>
+			</div>
+		</div>	
+	</body>
+</html>]]></html>
+        <name>Chat</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2016-11-17 17:23:25</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>049b5cdbdb8b22005994d7a0cf961949</sys_id>
+        <sys_mod_count>33</sys_mod_count>
+        <sys_name>Chat</sys_name>
+        <sys_package display_value="Chat" source="x_80249_chat">69ead01fdb4b22005994d7a0cf9619f9</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Chat">69ead01fdb4b22005994d7a0cf9619f9</sys_scope>
+        <sys_update_name>sys_ui_page_049b5cdbdb8b22005994d7a0cf961949</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2016-11-18 12:54:35</sys_updated_on>
+    </sys_ui_page>
+</record_update>

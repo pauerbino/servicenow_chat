@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_script">
+    <sys_ui_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <description/>
+        <global>false</global>
+        <name>x_80249_chat.Chat_app</name>
+        <script><![CDATA[(function(){
+	"use strict";
+
+	var app = new angular.module('myapp',[]);
+	
+	app.constant('config',{
+		endpoint:"https://dev19150.service-now.com/api/now/table/x_80249_chat_messages",
+		/* TODO: convertir a base64 "$username:$password" */
+		username: "admin",
+		password: "admin"
+	});
+	
+	app.controller('mainController', ['$scope','config','$interval','$http', function($scope,config,$interval,$http) {
+		$scope.messages   = [];
+		$scope.newMessage = {};
+
+		$scope.newMessage.username = prompt("Please enter your name", "Your name");
+		
+		$scope.getMessagesFromAPI = function(){
+			$http.get(config.endpoint + "?sysparm_limit=5&sysparm_query=ORDERBYDESCcreated_at", 
+				{headers:{'Authorization': 'Basic YWRtaW46YWRtaW4='}} ).then(function(response){
+					$scope.messages = [];
+					$scope.messages = response.data.result;
+				}, function(){
+					console.log("error");
+				});
+		};
+		
+		$scope.addMessageFromAPI = function(){
+			var data = {
+				username: $scope.newMessage.username,
+				message:  $scope.newMessage.message,
+				created_at: Date.now()
+			};
+
+			$http.post(config.endpoint ,data, {headers:{'Authorization': 'Basic YWRtaW46YWRtaW4='}}).then(function(response){
+				$scope.newMessage.message = '';
+				$scope.getMessagesFromAPI();
+			}, function(){
+				console.log("error");
+			});
+
+		};
+		
+	
+		$scope.getMessagesFromAPI();
+		
+		// ---------------
+		function test(){
+			$scope.getMessagesFromAPI();
+		}
+		$interval(test,5000);
+
+	
+	}]);
+	
+})();]]></script>
+        <script_name>Chat_app</script_name>
+        <sys_class_name>sys_ui_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2016-11-17 18:57:14</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>fa5f2413dbcb22005994d7a0cf9619f0</sys_id>
+        <sys_mod_count>73</sys_mod_count>
+        <sys_name>x_80249_chat.Chat_app</sys_name>
+        <sys_package display_value="Chat" source="x_80249_chat">69ead01fdb4b22005994d7a0cf9619f9</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Chat">69ead01fdb4b22005994d7a0cf9619f9</sys_scope>
+        <sys_update_name>sys_ui_script_fa5f2413dbcb22005994d7a0cf9619f0</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2016-11-18 13:00:05</sys_updated_on>
+        <use_scoped_format>false</use_scoped_format>
+    </sys_ui_script>
+</record_update>
